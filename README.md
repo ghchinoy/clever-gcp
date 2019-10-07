@@ -3,6 +3,12 @@
 Clever uses of `gcloud`, GCP, and bash to make cli use of GCP easier.
 
 
+## references
+
+* [Filtering and formatting fun with gcloud, GCP's command line interface](https://cloud.google.com/blog/products/gcp/filtering-and-formatting-fun-with), June 2016
+* [gcloud topic filters](https://cloud.google.com/sdk/gcloud/reference/topic/filters), Cloud SDK docs
+* [gcloud cheat sheet](https://gist.github.com/pydevops/cffbd3c694d599c6ca18342d3625af97), gist, pydevops 
+
 ## project id to bash var
 
 ```
