@@ -114,3 +114,20 @@ use `gcloud services enable SERVICENAME` after getting a list of services from `
 ```
 gcloud services enable deploymentmanager.googleapis.com servicemanagement.googleapis.com container.googleapis.com cloudresourcemanager.googleapis.com endpoints.googleapis.com file.googleapis.com ml.googleapis.com iam.googleapis.com sqladmin.googleapis.com 
 ```
+
+## create a firewall rule
+
+using network tag `customaccess`, create a firewall rule called `allow-custom`:
+
+```
+gcloud compute \
+--project=$PROJECT_ID \
+firewall-rules create allow-custom \
+--direction=INGRESS \
+--priority=1000 \
+--network=default \
+--action=ALLOW \
+--rules=tcp:9870,tcp:8088,tcp:8080 \
+--source-ranges=$BROWSER_IP/32 \
+--target-tags=customaccess
+```
