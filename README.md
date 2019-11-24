@@ -131,3 +131,42 @@ firewall-rules create allow-custom \
 --source-ranges=$BROWSER_IP/32 \
 --target-tags=customaccess
 ```
+
+# Custom Dataproc cluster
+
+install custom software onto a Dataproc cluster using a precreated, gcs-stored, bash script as well as a publically-available demo sample:
+
+```
+gcloud dataproc clusters create cluster-custom \
+--bucket $BUCKET \
+--subnet default \
+--zone $MYZONE \
+--region $MYREGION \
+--master-machine-type n1-standard-2 \
+--master-boot-disk-size 100 \
+--num-workers 2 \
+--worker-machine-type n1-standard-1 \
+--worker-boot-disk-size 50 \
+--num-preemptible-workers 2 \
+--image-version 1.2 \
+--scopes 'https://www.googleapis.com/auth/cloud-platform' \
+--tags customaccess \
+--project $PROJECT_ID \
+--initialization-actions 'gs://'$BUCKET'/init-script.sh','gs://cloud-training-demos/dataproc/datalab.sh'
+```
+
+example `init-script.sh`
+
+```
+#!/bin/bash
+
+# install Google Python client on all nodes
+apt-get update
+apt-get install -y python-pip
+pip install --upgrade google-api-python-client
+
+ROLE=$(/usr/share/google/get_metadata_value attributes/dataproc-role)
+if [[ "${ROLE}" == 'Master' ]]; then
+   git clone https://github.com/GoogleCloudPlatform/training-data-analyst
+fi
+```
