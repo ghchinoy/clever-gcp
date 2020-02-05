@@ -170,3 +170,7 @@ if [[ "${ROLE}" == 'Master' ]]; then
    git clone https://github.com/GoogleCloudPlatform/training-data-analyst
 fi
 ```
+
+# vm recommender for all projects
+
+see `recommender` bash script by Rishi Singhal

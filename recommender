@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# rishi singhal
+# 02/05/2020
+
+for project in  $(gcloud projects list --format="value(projectId)")
+do
+  echo "ProjectId:  $project"
+	for zone in  $(gcloud compute zones list --format="value(name)")
+	do
+  	# echo "Zone:  $zone"
+		gcloud beta recommender recommendations list \
+    	--project $project \
+    	--location $zone \
+    	--recommender=google.compute.instance.MachineTypeRecommender \
+ 		--format="csv[no-heading](description:label='Action',primaryImpact.costProjection.cost.units:label='Projected 		Cost',primaryImpact.costProjection.cost.currencyCode:label='Currency', content.operationGroups.operations.resource)"
+	done
+done
