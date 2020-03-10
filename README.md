@@ -46,7 +46,7 @@ while [[ -z $PV ]]; do PV=$(kubectl get pvc ${SERVICENAME} -o jsonpath='{.spec.v
 
 ## create a service account
 
-Create a service acount with a specific role (roles/storage.admin)
+Create a service acount with a specific role (roles/storage.admin) and then retrieve the json key
 
 ```
 export SERVICE_ACCOUNT=user-gcp-sa
@@ -60,6 +60,16 @@ export KEY_FILE=${HOME}/secrets/${SERVICE_ACCOUNT_EMAIL}.json
 gcloud iam service-accounts keys create ${KEY_FILE} \
   --iam-account ${SERVICE_ACCOUNT_EMAIL}
 export GOOGLE_APPLICATION_CREDENTIALS=${KEY_FILE}
+```
+
+Alternatively, one can create the service account and then retrieve the e-mail created, ex.:
+
+```
+gcloud iam service-accounts create spinnaker-account \
+    --display-name spinnaker-account
+export SA_EMAIL=$(gcloud iam service-accounts list \
+    --filter="displayName:spinnaker-account" \
+    --format='value(email)')
 ```
 
 ## create 3 vms
