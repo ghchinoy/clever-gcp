@@ -17,6 +17,12 @@ export PROJECT_ID=$(gcloud info --format='value(config.project)')
 
 Another clever use of the `--format` flag
 
+## project number
+
+```
+export PROJECT_NUMBER=$(gcloud projects describe $PROJECT_ID --format='value(projectN
+umber)')
+```
 
 ## obtaining an IP of a Cloud SQL server
 
