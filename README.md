@@ -9,6 +9,12 @@ Clever uses of `gcloud`, GCP, and bash to make cli use of GCP easier.
 * [gcloud topic filters](https://cloud.google.com/sdk/gcloud/reference/topic/filters), Cloud SDK docs
 * [gcloud cheat sheet](https://gist.github.com/pydevops/cffbd3c694d599c6ca18342d3625af97), gist, pydevops 
 
+## project id
+
+```
+gcloud auth list --filter=status:ACTIVE --format="value(account)"
+```
+
 ## project id to bash var
 
 ```
